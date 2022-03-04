@@ -118,8 +118,8 @@ const convertToLatLong = (x, y ,z) =>
         long = (firstLong - 180)
     }
     //console.log(lat + " " + long)
-    latField.value = lat.toFixed(3)
-    longField.value = long.toFixed(3)
+    latField.value = lat.toFixed(3) // updated
+    longField.value = long.toFixed(3) // updated
     
 }
 
