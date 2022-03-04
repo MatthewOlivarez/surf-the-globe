@@ -28,15 +28,6 @@ renderer.setPixelRatio(window.devicePixelRatio) // cleans up image, better quali
 document.body.appendChild(renderer.domElement)
 
 
-// light
-const ambientLight = new THREE.AmbientLight(0x333333);
-scene.add(ambientLight)
-
-const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
-scene.add(directionalLight)
-directionalLight.position.set(0, 50, 0)
-
-
 // create a sphere
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(3,50,50),
@@ -54,6 +45,15 @@ camera.position.z = 6
 // helper ( draws axes)
 //const helper = new THREE.AxesHelper(5)
 //scene.add(helper)
+
+
+// light
+const ambientLight = new THREE.AmbientLight(0x404040, 5);//333333
+scene.add(ambientLight)
+
+// const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
+// scene.add(directionalLight)
+// directionalLight.position.set(0, 50, 0)
 
 
 // controls 
@@ -106,20 +106,21 @@ window.addEventListener( 'mousedown', (e) => {
 const convertToLatLong = (x, y ,z) =>
 {
     const r = 3
-    lat = (90 - (Math.acos(y / r) * 180 / Math.PI)).toFixed(3)
-    const firstLong = (((270 + (Math.atan2(x, z) * 180 / Math.PI)) % 360) - 180).toFixed(3)
+    lat = (90 - (Math.acos(y / r) * 180 / Math.PI))
+    const firstLong = (((270 + (Math.atan2(x, z) * 180 / Math.PI)) % 360) - 180)
     if (firstLong < 0)
     {
-        long = firstLong + 180
+        long = (firstLong + 180)
         
     }
     else if (firstLong > 0)
     {
-        long = firstLong - 180
+        long = (firstLong - 180)
     }
-    latField.value = lat
-    longField.value = long
-    console.log(lat + " " + long)
+    //console.log(lat + " " + long)
+    latField.value = lat.toFixed(3)
+    longField.value = long.toFixed(3)
+    
 }
 
 // establishing the "main" function or entry point into file
