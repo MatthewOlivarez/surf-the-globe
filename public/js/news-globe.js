@@ -33,7 +33,7 @@ const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(3,50,50),
     new THREE.MeshBasicMaterial({
         //color: 0x2266EE
-        map: new THREE.TextureLoader().load('./img/Globe.jpeg') // jpg is "wrapped" around the sphere
+        map: new THREE.TextureLoader().load('../img/Globe.jpeg') // jpg is "wrapped" around the sphere
     })
 )
 sphere.userData.globe = true
@@ -61,7 +61,8 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.maxPolarAngle = 2 * Math.PI / 3
 controls.minPolarAngle = Math.PI / 3
 controls.enableDamping = true
-controls.enableZoom = false;
+controls.enableZoom = false
+controls.enablePan = false
 
 // add marker to clicked position
 const targetGeometry = new THREE.SphereGeometry( 0.025 )
