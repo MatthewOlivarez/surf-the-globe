@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name that Poke...Country Game</title>
+    <link rel="stylesheet" type="text/css" href="./css/game-home.css">
+	<script type="importmap">
+        {
+            "imports": 
+            {
+              "countrySeeds": "../js/country-seeds.js"
+            }
+        }
+    </script>
+</head>
+<body>
+
+	<div class="title">
+		<h1 id="heading">
+			Name that Country?
+		</h1>
+		<div class="lat-long">
+			<h3>
+				Latitude: <span id="latitude"></span>
+			</h3>
+			<h3>
+				Longitude: <span id="longitude"></span>
+			</h3>
+		</div>
+	</div>
+	
+	
+
+	<div id="stripe">
+		<button id="reset">New Lat/Long</button>
+		<span id="message"></span>
+		<a href="/game-globe"><button id="hint" class="mode">Hint</button></a>
+	</div>
+
+	<div id="container">
+
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+		<div class="square"></div>
+
+	</div>
+
+	<script type="module" src="./js/game-home.js"></script>
+
+</body>
+</html>

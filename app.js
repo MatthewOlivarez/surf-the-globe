@@ -10,6 +10,7 @@ app.set('view engine', 'ejs') // sets engine for ejs formatting
 // tells express to search for static files in views directory, static files are html files
 app.use(express.static(path.join(__dirname + '/views'))) 
 //app.set('views', path.join(__dirname, '/views'))
+
 app.use(express.urlencoded({ extended: true })) // parses requests in JSON format
 app.use(express.json()) // similar to above, ensures we use JSON format for data from api's
 
@@ -19,8 +20,8 @@ app.use(express.json()) // similar to above, ensures we use JSON format for data
 app.use(express.static(path.join(__dirname + '/public')))
 
 // both of below statements are meant to incorporate three.js library for 3-d functionality
-app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')));
-app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')));
+app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')))
+app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')))
 
 
 let newsStories = [] // this will be array of objects to store news stories
@@ -44,6 +45,14 @@ app.get('/', (req, res) => {
     //     res.render('index', { newsCollected })
     // }
     res.render('index') // landing page
+})
+
+app.get('/game', (req, res) => {
+    res.render('game-home')
+})
+
+app.get('/game-globe', (req, res) => {
+    res.render('game-globe')
 })
 
 app.get('/news', (req, res) => {

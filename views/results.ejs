@@ -4,16 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/results-styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="css/results-styles.css">
+
     <title>Results of Search</title>
+
+
 </head>
 <body>
+    
     <div class="resultsHeading">
-        <h1>Welcome to results page!</h1>
-        <h2>Here are the top news stories for <%= countryName %></h1>
+        <h1><%= countryName %> Informational Page</h1>
         <hr>
     </div>
-    <div class="row">
+
+    
+
+    <div class="sidenav">  
+        <p>Surf the Globe</p>
+        <a href="#basicfacts" class="tabs">Basic Facts
+            <br>
+            <i class="fas fa-book"></i>
+        </a> 
+
+        <a href="#news" class="active tabs">News 
+            <br>
+            <i class="fas fa-rss"></i>
+        </a> 
+
+        <a href="#culture" class="tabs">Culture
+            <br>
+            <i class="fas fa-music"></i>
+        </a> 
+
+        <a href="#health" class="tabs">Health 
+            <br>
+            <i class="fas fa-heart"></i>
+        </a> 
+    </div>
+
+    <div class="rightbar">
+        <a href="/">Home
+            <br>
+            <i class="fas fa-arrow"></i>
+        </a>
+    </div>
+
+    <div id="news" class="active row articles">
+        <h1 class="newsTitle">Top 10 News Stories</h1>
         <% for (let i = 0; i < newsStories.length - 1; i++) { %>
         <div class="newsStory col">
             <h3><%= newsStories[i].title %></h3>
@@ -23,6 +61,24 @@
         </div>
         <% } %>
     </div>
-    <h4><a href="/">Click to go back to search page</a></h4>
+ 
+    <div id="culture" class="resultsHeading">
+        <h1>Culture</h1>
+        <h2>Here is cultural information for <%= countryName %>!</h2>
+        <p> music, movies, shows, etc </p>   
+        <hr>
+    </div>
+    
+    <div id="health" class="resultsHeading">
+        <h1>Health</h1>
+        <h2>Here is health information for <%= countryName %>!</h2>
+        <p> covid, deathrates, etc </p>
+        <hr>
+    </div>
+    
+    <h4><a href="/news">Click to go back to search page</a></h4>
+
+    <script src="js/results.js"></script>
+
 </body>
 </html>

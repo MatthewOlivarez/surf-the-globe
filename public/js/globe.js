@@ -51,7 +51,7 @@ function animate() {
     // addEventListener('click', () => {
     //     console.log(sphere.userData.position)
     // })
-    sphere.rotation.y += 0.001
+    sphere.rotation.y += 0.002
 }
 
 // calling entry point
