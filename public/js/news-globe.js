@@ -133,7 +133,7 @@ function animate() {
 
 // calling entry point
 animate()
-console.log(scene.children)
+//console.log(scene.children)
 
 // ------------------------------------------- STARTING DOM MANIPULATION --------------------------------------------------
 

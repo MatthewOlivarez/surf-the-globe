@@ -42,7 +42,7 @@ sphere.userData.globe = true
 sphere.userData.name = "Globe"
 scene.add(sphere)
 
-camera.position.z = 10
+camera.position.z = 6
 
 // helper ( draws axes)
 // const helper = new THREE.AxesHelper(5)
@@ -54,7 +54,8 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.maxPolarAngle = 2 * Math.PI / 3
 controls.minPolarAngle = Math.PI / 3
 controls.enableDamping = true
-controls.enableZoom = true;
+controls.enableZoom = false;
+controls.enablePan = false
 
 // add marker to clicked position
 const targetGeometry = new THREE.SphereGeometry( 0.0125 )
@@ -115,7 +116,7 @@ const convertToLatLong = (x, y ,z) =>
     {
         long = firstLong - 180
     }
-    console.log(lat + " " + long)
+    //console.log(lat + " " + long)
 }
 
 // establishing the "main" function or entry point into file
@@ -127,4 +128,4 @@ function animate() {
 
 // calling entry point
 animate()
-console.log(scene.children)
+//console.log(scene.children)
