@@ -7,7 +7,7 @@ console.log("Hello World")
 `
 
 
-# Useful links regarding tools and software used in this project
+### Useful links regarding tools and software used in this project
 
 1. Intro to DOM - manipulating HTML elements with JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
 
@@ -22,7 +22,7 @@ console.log("Hello World")
 6. Axios - Docs: https://axios-http.com/docs/example
 
 
-# API links
+### API links
 
 1. Geoapify: https://www.geoapify.com/reverse-geocoding-api
 
