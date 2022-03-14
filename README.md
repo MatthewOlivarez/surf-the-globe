@@ -25,5 +25,4 @@ console.log("Hello World")
 ### API links
 
 1. Geoapify: https://www.geoapify.com/reverse-geocoding-api
-
 2. News API: https://newsapi.org/docs/endpoints/top-headlines
