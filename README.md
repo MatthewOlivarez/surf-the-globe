@@ -15,15 +15,10 @@ console.log("Hello World")
 ### Useful links regarding tools and software used in this project
 
 1. Intro to DOM - manipulating HTML elements with JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
-
 2. Node.js - Docs: https://nodejs.org/en/docs/guides/getting-started-guide/
-
 3. Express.js - Docs: https://expressjs.com/en/starter/hello-world.html
-
 4. Three.js: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
-
 5. ejs - Docs: https://ejs.co/#docs
-
 6. Axios - Docs: https://axios-http.com/docs/example
 
 
