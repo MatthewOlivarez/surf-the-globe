@@ -13,71 +13,98 @@
 </head>
 <body>
     
-    <div class="resultsHeading">
-        <h1><%= countryName %> Informational Page</h1>
-        <hr>
-    </div>
+    <div class="wrapper">
 
+        <aside>
+            <div class="corner-title">
+                <h4>Surf the Globe</h4>
+            </div>
+            <div class="links">
+                <ul>
+                    <li>
+                        <a href="/">
+                            <button class="Home"><i class="fas fa-home"></i><br>Home</button>
+                        </a>
+                    </li>
+                    <li>
+                        <button class="tablinks active" onclick="openInfo(event, 'News')"><i class="fas fa-rss"></i><br>News</button>
+                    </li>
+                    <li>
+                        <button class="tablinks" onclick="openInfo(event, 'Facts')"><i class="fas fa-book"></i><br>Facts</button>
+                    </li>
+                    <li>
+                        <button class="tablinks" onclick="openInfo(event, 'Culture')"><i class="fas fa-music"></i><br>Culture</button>
+                    </li>
+                    <li>
+                        <button class="tablinks" onclick="openInfo(event, 'Health')"><i class="fas fa-heart"></i><br>Health</button>
+                    </li>
+                    <li>
+                        <a href="/news">
+                            <button class="Back"><i class="fas fa-arrow-left"></i><br>Previous Page</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        </aside>
+
+        <!-- <div class="rightbar">
+            <a href="/">Home
+                <br>
+                <i class="fas fa-arrow"></i>
+            </a>
+            <a href="/news">New Search
+                <br>
+                <i class="fas fa-arrow"></i>
+            </a>
+        </div> -->
+        
+        <main>
+            <div class="mainHeading">
+                <h1><%= countryName %> Informational Page</h1>
+                <hr>
+            </div>
+
+            <div class="content">
+                <div id="News" class="tabcontent"> <!-- row articles  -->
+                    <h1 class="news-title">Top 10 News Stories</h1>
+                    <div class="articles">
+                        <% for (let i = 0; i < newsStories.length - 1; i++) { %>
+                        <div class="news-story">
+                            <h3><%= newsStories[i].title %></h3>
+                            <h5>Story by <%= newsStories[i].author %></h5>
+                            <p><%= newsStories[i].description %></p>
+                            <p><a href="<%= newsStories[i].url %>">Read full story here</a></p>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
     
+                <div id="Facts" class="tabcontent">
+                    <h1>Facts</h1>
+                    <h2>Here is cultural information for <%= countryName %>!</h2>
+                    <p> music, movies, shows, etc </p>   
+                    <hr>
+                </div>
+            
+                <div id="Culture" class="tabcontent">
+                    <h1>Culture</h1>
+                    <h2>Here is cultural information for <%= countryName %>!</h2>
+                    <p> music, movies, shows, etc </p>   
+                    <hr>
+                </div>
+                
+                <div id="Health" class="tabcontent">
+                    <h1>Health</h1>
+                    <h2>Here is health information for <%= countryName %>!</h2>
+                    <p> covid, deathrates, etc </p>
+                    <hr>
+                </div>
+            </div>
 
-    <div class="sidenav">  
-        <p>Surf the Globe</p>
-        <a href="#basicfacts" class="tabs">Basic Facts
-            <br>
-            <i class="fas fa-book"></i>
-        </a> 
+        </main>
 
-        <a href="#news" class="active tabs">News 
-            <br>
-            <i class="fas fa-rss"></i>
-        </a> 
-
-        <a href="#culture" class="tabs">Culture
-            <br>
-            <i class="fas fa-music"></i>
-        </a> 
-
-        <a href="#health" class="tabs">Health 
-            <br>
-            <i class="fas fa-heart"></i>
-        </a> 
     </div>
-
-    <div class="rightbar">
-        <a href="/">Home
-            <br>
-            <i class="fas fa-arrow"></i>
-        </a>
-    </div>
-
-    <div id="news" class="active row articles">
-        <h1 class="newsTitle">Top 10 News Stories</h1>
-        <% for (let i = 0; i < newsStories.length - 1; i++) { %>
-        <div class="newsStory col">
-            <h3><%= newsStories[i].title %></h3>
-            <h5>Story by <%= newsStories[i].author %></h5>
-            <p><%= newsStories[i].description %></p>
-            <p><a href="<%= newsStories[i].url %>">Read full story here</a></p>
-        </div>
-        <% } %>
-    </div>
- 
-    <div id="culture" class="resultsHeading">
-        <h1>Culture</h1>
-        <h2>Here is cultural information for <%= countryName %>!</h2>
-        <p> music, movies, shows, etc </p>   
-        <hr>
-    </div>
-    
-    <div id="health" class="resultsHeading">
-        <h1>Health</h1>
-        <h2>Here is health information for <%= countryName %>!</h2>
-        <p> covid, deathrates, etc </p>
-        <hr>
-    </div>
-    
-    <h4><a href="/news">Click to go back to search page</a></h4>
-
     <script src="js/results.js"></script>
 
 </body>
