@@ -37,10 +37,28 @@
                         </div>
                     </form>
                 </div>
+                <button data-modal-target="#modal">Help</button>
                 <script type="module" src="/js/news-globe.js"></script>
             </div>
         </div>
     </div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="modal-title">News Globe Help Screen</div>
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            Option 1 (Preferred):
+            1. Interact with the globe to find a country you'd like information about
+            2. Click that country
+            3. Ensure the latitude and longitude form is filled out
+            4. Click Search
+            Option 2:
+            1. Enter valid latitude and longitude coordinate points into the form
+            4. Click Search
+        </div>
+    </div>
+    <div id="overlay"></div>
     <!-- <button id="darkMode">Dark Mode</button> -->
     <!-- <script type="module" src="./js/news-main.js"></script> -->
 </body>
