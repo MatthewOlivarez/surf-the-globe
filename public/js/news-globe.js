@@ -6,6 +6,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let latField = document.getElementById("latitude") // grabs html tag with id of latitude
 let longField = document.getElementById("longitude") // grabs html tag with id of longitude
 let formSubmit = document.getElementById("formSubmit") // grabs html tag with id of formSubmit
+const openModalButtons = document.querySelectorAll("[data-modal-target]")
+const closeModalButtons = document.querySelectorAll("[data-close-button]")
+const overlay = document.getElementById("overlay")
 let obj
 let lat, long
 
@@ -135,7 +138,40 @@ function animate() {
 animate()
 //console.log(scene.children)
 
-// ------------------------------------------- STARTING DOM MANIPULATION --------------------------------------------------
+// ------------------------------------------- Popup help screen --------------------------------------------------
+
+const openModal = (modal) => {
+    if (modal === null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+const closeModal = (modal) => {
+    if (modal === null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
 
 
   
