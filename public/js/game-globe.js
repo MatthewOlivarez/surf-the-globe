@@ -1,6 +1,13 @@
 // imports 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { pickedCountry } from 'gameHome'
+
+
+const openModalButtons = document.querySelectorAll("[data-modal-target]")
+const closeModalButtons = document.querySelectorAll("[data-close-button]")
+const overlay = document.getElementById("overlay")
+const modal = document.getElementById("modal")
 
 // creating scene, camera, renderer
 const scene = new THREE.Scene()
@@ -16,9 +23,16 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 })
 
-renderer.setSize(window.innerWidth, window.innerHeight)
+var container = document.getElementById('game-modal-body')
+var width = modal.offsetWidth
+var height = modal.offsetHeight
+renderer.setSize(width, height)
+// add the renderer to the div
+container.appendChild(renderer.domElement);
+
+//renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(window.devicePixelRatio) // cleans up image, better quality
-document.body.appendChild(renderer.domElement)
+//document.body.appendChild(renderer.domElement)
 
 
 // light
@@ -125,6 +139,41 @@ function animate() {
     renderer.render(scene, camera)
     controls.update()
 }
+
+// ------------------------------------------- Popup help screen --------------------------------------------------
+
+const openModal = (modal) => {
+    if (modal === null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+const closeModal = (modal) => {
+    if (modal === null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
 
 // calling entry point
 animate()

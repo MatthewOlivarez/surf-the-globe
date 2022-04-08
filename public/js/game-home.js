@@ -10,10 +10,11 @@ const resetButton = document.querySelector("#reset")
 const latitude = document.getElementById('latitude')
 const longitude = document.getElementById('longitude')
 const heading = document.getElementById('heading')
+const openModalButtons = document.querySelectorAll("[data-modal-target]")
+const closeModalButtons = document.querySelectorAll("[data-close-button]")
+const overlay = document.getElementById("overlay")
 
-//console.log(availableCountries[0])
-
-
+// ------------------------------------------- Game Logic --------------------------------------------------------------
 
 const init = () =>
 {
@@ -118,5 +119,41 @@ const pickCountry = () =>
 	return countries[Math.floor(Math.random() * numOfSquares)]
 }
 
+// ------------------------------------------- Popup help screen --------------------------------------------------
+
+const openModal = (modal) => {
+    if (modal === null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+const closeModal = (modal) => {
+    if (modal === null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+
 init()
 
+export { pickedCountry }
