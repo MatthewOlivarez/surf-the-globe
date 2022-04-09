@@ -29,6 +29,9 @@ button
     width: 100%;
     padding-top: 10%;
     padding-bottom: 10%;
+    background-color: steelblue;
+    border: none;
+    border-top: .1px solid black;
 }
 main 
 {
@@ -38,8 +41,8 @@ main
 aside 
 {
     flex: 0 0 10%;
-    background-color: darkslategray;
-    color: white;
+    background-color: steelblue;
+    color: black;
     display: flex;
     flex-direction: column;
 }
@@ -71,7 +74,7 @@ aside
 {
     margin: 1rem 5rem;
 }
-.news-title
+.subtitle
 {
     text-align: center;
 }
@@ -94,8 +97,8 @@ aside
 }
 .active
 {
-    background-color: darkslategray;
-    color: white;
+    background-color: gainsboro;
+    color: black;
 }
 #Facts
 {
