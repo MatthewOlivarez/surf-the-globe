@@ -16,13 +16,38 @@ body
     overflow: hidden;
 }
 
-.header
+.container
 {
     /* -webkit-background-size: cover;
     background-size: cover; */
+    /* position: absolute; */
     position: absolute;
 }
 
+.wrapper
+{
+    /* z-index: 1; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 10px;
+    grid-auto-rows: 100px;
+    grid-template-areas:
+        "a a a a b b b b c c c c d d d d"
+        "e e e e f f f f g g g g h h h h";
+    align-items: start; 
+}
+
+.latlongDisplay 
+{
+    grid-area: d;
+}
+
+.help-button
+{
+    grid-area: h;
+}
 /* .header-text
 {
     height: 100%;
@@ -39,10 +64,11 @@ body
     height: 100vh;
 } */
 
-.content
+/* .globe
 {
-    text-align: center;
-}
+    
+} */
+
 form.form-example 
 {
     display: table;

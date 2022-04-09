@@ -26,6 +26,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 })
 
+
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(window.devicePixelRatio) // cleans up image, better quality
 document.body.appendChild(renderer.domElement)
