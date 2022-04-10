@@ -8,6 +8,9 @@ const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
 const modal = document.getElementById("modal")
+const container = document.getElementById('game-modal-body')
+const width = modal.offsetWidth
+const height = modal.offsetHeight
 
 // creating scene, camera, renderer
 const scene = new THREE.Scene()
@@ -23,9 +26,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 })
 
-var container = document.getElementById('game-modal-body')
-var width = modal.offsetWidth
-var height = modal.offsetHeight
+
 renderer.setSize(width, height)
 // add the renderer to the div
 container.appendChild(renderer.domElement);
