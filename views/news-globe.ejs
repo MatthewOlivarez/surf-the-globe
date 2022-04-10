@@ -19,28 +19,35 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <div class="wrapper">
-            <div class="latlongDisplay">
-                <form action="/search" method="post" class="form-example" id="formSubmit">
-                    <div class="form-example">
-                        <label for="latitude">Latitude: </label>
-                        <input type="number" step="0.000001" name="latitude" id="latitude" required>
-                    </div>
-                    <div class="form-example">
-                        <label for="longitude">Longitude: </label>
-                        <input type="number" step="0.000001" name="longitude" id="longitude" required>
-                    </div>
-                    <div class="form-example">
-                        <input type="submit" value="Search">
-                    </div>
-                </form>
-            </div>
-            <div class="help-button">
-                <button data-modal-target="#modal">Help</button>
-            </div>
+
+    <div class="wrapper">
+        <div class="latlongDisplay">
+            <!-- <form action="/search" method="post" class="form-example" id="formSubmit">
+                <div class="form-example">
+                    <label for="latitude">Latitude: </label>
+                    <input type="number" step="0.000001" name="latitude" id="latitude" required>
+                </div>
+                <div class="form-example">
+                    <label for="longitude">Longitude: </label>
+                    <input type="number" step="0.000001" name="longitude" id="longitude" required>
+                </div>
+                <div class="form-example">
+                    <input type="submit" value="Search">
+                </div>
+            </form> -->
+            <form class="form-inline" action="/search" method="POST" id="formSubmit">
+                <label for="latitude">Latitude: </label>
+                <input id="email" type="number" step="0.000001" name="latitude" id="latitude" required>
+                <label for="longitude">Longitude: </label>
+                <input id="pwd" type="number" step="0.000001" name="longitude" id="longitude" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="help-div">
+            <button class="help-button" data-modal-target="#modal">Help</button>
         </div>
     </div>
+    
     <div class="modal" id="modal">
         <div class="modal-header">
             <div class="modal-title"><h3>News Globe Help Screen</h3></div>
