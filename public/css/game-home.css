@@ -1,10 +1,18 @@
-body {
+*
+{
+    box-sizing: border-box;
+}
+
+body 
+{
 	background-color: steelblue;
 	margin: 0;
+	padding: 0; /* maybe can be deleted */
 	font-family: "Montserrat", "Avenir";
 }
 
-.square {
+.square 
+{
 	border: .1rem solid white;
 	width: 21%;
 	background: gainsboro;
@@ -18,13 +26,15 @@ body {
 	color: black;
 }
 
-#container {
+#container 
+{
 	margin: 5% auto;
 	max-width: 600px;
 	text-align: center;
 }
 
-.title {
+.title 
+{
 	color: white;
 	font-weight: normal;
 	text-align: center;
@@ -40,7 +50,7 @@ body {
 	display: inline;
 }
 
-h3
+.lat-long h3
 {
 	display: inline;
 	margin: auto 25px;
@@ -62,7 +72,7 @@ h3
 	font-size: 200%;
 }
 
-button {
+#stripe button {
 	border: none;
 	background: none;
 	text-transform: uppercase;
@@ -82,44 +92,15 @@ button {
 	width: 20%;
 }
 
-a
-{
-	/* color: steelblue; */
-	text-decoration: none;
-}
-
-/* unvisited link */
-a:link 
-{
-	/* color: steelblue; */
-	text-decoration: none;
-}
-  
-/* visited link */
-a:visited 
-{
-	color: steelblue;
-	text-decoration: none;
-}
-
-/* mouse over link */
-a:hover 
-{
-	color: white;
-	text-decoration: none;
-}
-
-/* selected link */
-a:active 
-{
-	/* color: steelblue; */
-	text-decoration: none;
-}
-
-button:hover 
+#stripe button:hover 
 {
 	color: white;
 	background: steelblue;
+}
+
+p
+{
+    margin: 1rem 0;
 }
 
 .modal
@@ -151,7 +132,7 @@ button:hover
     border-bottom: 1px solid black;
 }
 
-.modal-header .title
+.modal-header .modal-title
 {
     font-size: 1.25rem;
     font-weight: bold;
@@ -193,5 +174,10 @@ button:hover
 
 #game-modal-body
 {
-	padding: 10px 0;
+	padding: 0;
+}
+
+.modal-header h3
+{
+	margin: 0.50rem;
 }

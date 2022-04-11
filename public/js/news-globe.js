@@ -9,6 +9,7 @@ let formSubmit = document.getElementById("formSubmit") // grabs html tag with id
 const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
+const home = document.getElementById("home")
 let obj
 let lat, long
 

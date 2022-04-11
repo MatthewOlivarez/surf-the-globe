@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name that Poke...Country Game</title>
+    <title>Name That Country Game</title>
     <link rel="stylesheet" type="text/css" href="./css/game-home.css">
 	<script type="importmap">
         {
@@ -40,6 +40,7 @@
 
 	<div id="stripe">
 		<button id="reset">New Lat/Long</button>
+        <button onclick="location.href='/'" type="button" class="home-button">Home</button>
 		<span id="message"></span>
 		<button data-modal-target="#modal">Help</button>
 		<button data-modal-target="#game-modal" id="hint" class="mode">Hint</button>
@@ -72,7 +73,6 @@
             <h3>Option 2:</h3>
             <p>1. Enter valid latitude and longitude coordinate points into the form</p>
             <p>2. Click Search</p>
-            
         </div>
     </div>
 	<div class="modal" id="game-modal">
