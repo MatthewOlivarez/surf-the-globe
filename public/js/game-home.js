@@ -30,17 +30,18 @@ const setUpSquares = () =>
 		squares[i].addEventListener("click", function()
 		{
 			var clickedCountry = this.innerHTML
-			if ( clickedCountry === pickedCountry.name )
+			if ( clickedCountry === pickedCountry.name  && messageDisplay.innerHTML !== "Correct")
 			{
 				messageDisplay.textContent = "Correct"
 				resetButton.textContent = "Play Again?"
 				heading.innerHTML += " " + clickedCountry
 				//changeCountry(clickedCountry)
-			} else 
+			} 
+			else 
 			{
-				this.style.backgroundColor = "steelblue"
+				this.style.backgroundColor = "teal"
 				this.style.border = "none"
-				this.style.color = "steelblue"
+				this.style.color = "teal"
 				messageDisplay.textContent = "Try Again!"
 			}
 		})
@@ -64,7 +65,7 @@ const reset = () =>
 		{
 			squares[i].style.display = "block"
 			squares[i].innerHTML = countries[i].name
-			squares[i].style.backgroundColor = "gainsboro"
+			squares[i].style.backgroundColor = "white"
 			squares[i].style.color = "black"
 			squares[i].style.border = ".1rem solid white"
 		} else 

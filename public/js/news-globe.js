@@ -1,5 +1,6 @@
 // imports 
 import * as THREE from 'three'
+import { Float32Attribute } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // various variables/assignments
@@ -9,7 +10,7 @@ let formSubmit = document.getElementById("formSubmit") // grabs html tag with id
 const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
-const home = document.getElementById("home")
+const globeCanvas = document.getElementById("globe-canvas")
 let obj
 let lat, long
 
@@ -29,8 +30,10 @@ const renderer = new THREE.WebGLRenderer({
 
 
 renderer.setSize(window.innerWidth, window.innerHeight)
+//renderer.setSize(width, height)
 renderer.setPixelRatio(window.devicePixelRatio) // cleans up image, better quality
-document.body.appendChild(renderer.domElement)
+//document.body.appendChild(renderer.domElement)
+globeCanvas.appendChild(renderer.domElement)
 
 
 // create a sphere
@@ -48,18 +51,46 @@ scene.add(sphere)
 camera.position.z = 6
 
 // helper ( draws axes)
-//const helper = new THREE.AxesHelper(5)
-//scene.add(helper)
+// const helper = new THREE.AxesHelper(5)
+// scene.add(helper)
 
 
 // light
-const ambientLight = new THREE.AmbientLight(0x404040, 5);//333333
-scene.add(ambientLight)
+// const ambientLight = new THREE.AmbientLight(0x404040, 5);//333333
+// scene.add(ambientLight)
 
-// const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
-// scene.add(directionalLight)
-// directionalLight.position.set(0, 50, 0)
+const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
+scene.add(directionalLight)
+directionalLight.position.set(0, 50, 25)
+// const color = 0xffffff, intensity = 3;
+// const light = new THREE.DirectionalLight(color, intensity);
+// light.position.set(4, 4, 4);
+// scene.add(light);
 
+
+// stars
+const starGeometry = new THREE.BufferGeometry()
+const starMaterial = new THREE.PointsMaterial({color: 0xffffff})
+
+const starVertices = []
+let flag = true
+for (let i = 0; i < 10000; i++)
+{
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    let z = Math.random() * 2000
+    if (flag)
+    {
+        z *= -1
+    }
+    starVertices.push(x,y,z)
+    flag = !flag
+}
+starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3))
+
+const stars = new THREE.Points(starGeometry, starMaterial)
+
+scene.add(stars)
 
 // controls 
 const controls = new OrbitControls(camera, renderer.domElement)
@@ -74,6 +105,13 @@ const targetGeometry = new THREE.SphereGeometry( 0.025 )
 const targetMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
 let target = new THREE.Mesh( targetGeometry, targetMaterial )
 scene.add( target )
+
+// group
+// const group = new THREE.Group()
+// group.add( ambientLight )
+// group.add( stars )
+
+// scene.add( group )
 
 // mouse click functionality
 const mouse = new THREE.Vector2()
