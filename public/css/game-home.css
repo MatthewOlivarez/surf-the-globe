@@ -1,21 +1,23 @@
 *
 {
     box-sizing: border-box;
+	font-family: Poppins, sans-serif;
 }
 
 body 
 {
-	background-color: steelblue;
+	background-color: teal;
 	margin: 0;
 	padding: 0; /* maybe can be deleted */
-	font-family: "Montserrat", "Avenir";
+	/* font-family: "Montserrat", "Avenir"; */
+	
 }
 
 .square 
 {
 	border: .1rem solid white;
-	width: 21%;
-	background: gainsboro;
+	width: 20%;
+	background: white;
 	padding: 3rem 0;
 	float: left;
 	margin: 1.66%;
@@ -24,6 +26,7 @@ body
 	--webkit-transition: background 0.4s;
 	-moz-transition: background 0.4s;
 	color: black;
+	/* text-transform: uppercase; */
 }
 
 #container 
@@ -36,10 +39,10 @@ body
 .title 
 {
 	color: white;
-	font-weight: normal;
+	/* font-weight: normal; */
 	text-align: center;
 	text-transform: uppercase;
-	background-color: steelblue;
+	background-color: teal;
 	margin: 2.5% 0;
 	line-height: 1.1;
 	padding: 20px 0;
@@ -64,7 +67,7 @@ body
 }
 
 .selected {
-	color: steelblue;
+	color: teal;
 	background-color: gainsboro;
 }
 
@@ -78,7 +81,7 @@ body
 	text-transform: uppercase;
 	height: 100%;
 	font-weight: 700;
-	color: steelblue;
+	color: teal;
 	letter-spacing: 1px;
 	font-size: inherit;
 	transition: all 0.3s;
@@ -95,7 +98,7 @@ body
 #stripe button:hover 
 {
 	color: white;
-	background: steelblue;
+	background: teal;
 }
 
 p
