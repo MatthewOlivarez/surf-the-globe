@@ -82,9 +82,27 @@
     
                 <div id="Facts" class="tabcontent">
                     <h1 class="subtitle">Facts</h1>
-                    <h2>Here is cultural information for <%= countryName %>!</h2>
-                    <p> music, movies, shows, etc </p>   
                     <hr>
+                    <img src="<%= countryFacts[0][0].flags.png %>"/>
+                    <h3>Official Name: <%= countryFacts[0][0].name.official %></h3>
+                    <h3>Capital: <%= countryFacts[0][0].capital %></h3>
+                    <h3>Region: <%= countryFacts[0][0].region %></h3>
+                    <h3>Subregion: <%= countryFacts[0][0].subregion %></h3>
+                    <h3>Language:
+                        <% Object.keys(countryFacts[0][0].languages).forEach((key, index) => { %>
+                            <%- countryFacts[0][0].languages[key] %>
+                        <% }) %>
+                    </h3>
+                    <h3>Currency Name: 
+                        <% Object.keys(countryFacts[0][0].currencies).forEach((key, index) => { %>
+                            <%- countryFacts[0][0].currencies[key].name %>
+                        <% }) %>
+                    </h3>
+                    <h3>Currency Symbol:
+                        <% Object.keys(countryFacts[0][0].currencies).forEach((key, index) => { %>
+                            <%- countryFacts[0][0].currencies[key].symbol %>
+                        <% }) %>
+                    </h3> 
                 </div>
             
                 <div id="Culture" class="tabcontent">
