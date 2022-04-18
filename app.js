@@ -10,6 +10,7 @@ app.set('view engine', 'ejs') // sets engine for ejs formatting
 // tells express to search for static files in views directory, static files are html files
 app.use(express.static(path.join(__dirname + '/views'))) 
 //app.set('views', path.join(__dirname, '/views'))
+
 app.use(express.urlencoded({ extended: true })) // parses requests in JSON format
 app.use(express.json()) // similar to above, ensures we use JSON format for data from api's
 
@@ -19,12 +20,11 @@ app.use(express.json()) // similar to above, ensures we use JSON format for data
 app.use(express.static(path.join(__dirname + '/public')))
 
 // both of below statements are meant to incorporate three.js library for 3-d functionality
-app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')));
-app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')));
+app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')))
+app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')))
 
 
 let newsStories = [] // this will be array of objects to store news stories
-let countryFacts = []
 let newsCollected = true 
 let countryCode // will store country code returned from geoapify api
 let countryName // will store country name returned from geoapify api
@@ -45,6 +45,14 @@ app.get('/', (req, res) => {
     //     res.render('index', { newsCollected })
     // }
     res.render('index') // landing page
+})
+
+app.get('/game', (req, res) => {
+    res.render('game-home')
+})
+
+app.get('/game-globe', (req, res) => {
+    res.render('game-globe')
 })
 
 app.get('/news', (req, res) => {
@@ -85,19 +93,6 @@ app.post('/search', async (req, res) => { // post request to route search
             // handle error
             console.log(error);
         })
-   
-    await axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-        .then((response) => {
-            countryFacts = []
-            //console.log(response.data.articles[i])
-            countryFacts.push(response.data)
-            //console.log(countryFacts[0][0].languages.eng)
-            //var langs = Object.keys(countryFacts[0][0].languages)
-        })
-        .catch((error) => {
-            // handle error
-            console.log(error);
-        })
     //res.send('worked')
     res.redirect('/results') // redirects to results route, which will display results to user
 })
@@ -106,7 +101,7 @@ app.post('/search', async (req, res) => { // post request to route search
 // "get" route that targets our results page, and will render results file from views directory
 app.get('/results', (req, res) => {
     //res.render('results')
-    res.render('results', { newsStories, countryName, countryFacts }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
+    res.render('results', { newsStories, countryName }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
 })
  
 
