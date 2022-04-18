@@ -26,6 +26,7 @@ app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/example
 
 let newsStories = [] // this will be array of objects to store news stories
 let newsCollected = true 
+let countryFacts = []
 let countryCode // will store country code returned from geoapify api
 let countryName // will store country name returned from geoapify api
 
@@ -93,6 +94,18 @@ app.post('/search', async (req, res) => { // post request to route search
             // handle error
             console.log(error);
         })
+    await axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
+        .then((response) => {
+            countryFacts = []
+            //console.log(response.data.articles[i])
+            countryFacts.push(response.data)
+            //console.log(countryFacts[0][0].languages.eng)
+            //var langs = Object.keys(countryFacts[0][0].languages)
+        })
+        .catch((error) => {
+            // handle error
+            console.log(error);
+        })
     //res.send('worked')
     res.redirect('/results') // redirects to results route, which will display results to user
 })
@@ -101,7 +114,7 @@ app.post('/search', async (req, res) => { // post request to route search
 // "get" route that targets our results page, and will render results file from views directory
 app.get('/results', (req, res) => {
     //res.render('results')
-    res.render('results', { newsStories, countryName }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
+    res.render('results', { newsStories, countryName, countryFacts }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
 })
  
 
