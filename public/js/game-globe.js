@@ -1,7 +1,6 @@
 // imports 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
 import { pickedCountry } from 'gameHome'
 
 
@@ -67,12 +66,12 @@ camera.position.z = 6
 
 
 // controls 
-// const controls = new OrbitControls(camera, renderer.domElement)
-// controls.maxPolarAngle = 2 * Math.PI / 3
-// controls.minPolarAngle = Math.PI / 3
-// controls.enableDamping = true
-// controls.enableZoom = false;
-// controls.enablePan = false
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.maxPolarAngle = 2 * Math.PI / 3
+controls.minPolarAngle = Math.PI / 3
+controls.enableDamping = true
+controls.enableZoom = false;
+controls.enablePan = false
 
 
 // add marker to clicked position

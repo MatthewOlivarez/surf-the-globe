@@ -13,6 +13,7 @@ const heading = document.getElementById('heading')
 const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
+const countryButton = document.getElementById("country-button")
 
 // ------------------------------------------- Game Logic --------------------------------------------------------------
 
@@ -35,6 +36,8 @@ const setUpSquares = () =>
 				messageDisplay.textContent = "Correct"
 				resetButton.textContent = "Play Again?"
 				heading.innerHTML += " " + clickedCountry
+				countryButton.innerText = "Explore " + clickedCountry
+				countryButton.style.display = "inline"
 				//changeCountry(clickedCountry)
 			} 
 			else 
@@ -54,11 +57,12 @@ const reset = () =>
 	countries = generateRandomCountries(numOfSquares)
 	//console.log(countries)
 	pickedCountry = pickCountry()
-	latitude.innerHTML = pickedCountry.latitude.toFixed(3)
-	longitude.innerHTML = pickedCountry.longitude.toFixed(3)
+	latitude.value = parseFloat(pickedCountry.latitude).toFixed(3) // updated
+    longitude.value = parseFloat(pickedCountry.longitude).toFixed(3) // updated
 	resetButton.innerHTML = "New Countries"
 	messageDisplay.innerHTML = ""
 	heading.innerHTML = "Name that country?"
+	countryButton.style.display = "none"
 	for ( let i = 0; i < squares.length; i++)
 	{
 		if (countries[i])
