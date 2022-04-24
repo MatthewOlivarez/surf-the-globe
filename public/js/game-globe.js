@@ -1,6 +1,7 @@
 // imports 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
 import { pickedCountry } from 'gameHome'
 
 
@@ -59,24 +60,27 @@ scene.add(sphere)
 
 camera.position.z = 6
 
+
 // helper ( draws axes)
 // const helper = new THREE.AxesHelper(5)
 // scene.add(helper)
 
 
 // controls 
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.maxPolarAngle = 2 * Math.PI / 3
-controls.minPolarAngle = Math.PI / 3
-controls.enableDamping = true
-controls.enableZoom = false;
-controls.enablePan = false
+// const controls = new OrbitControls(camera, renderer.domElement)
+// controls.maxPolarAngle = 2 * Math.PI / 3
+// controls.minPolarAngle = Math.PI / 3
+// controls.enableDamping = true
+// controls.enableZoom = false;
+// controls.enablePan = false
+
 
 // add marker to clicked position
-const targetGeometry = new THREE.SphereGeometry( 0.0125 )
+const targetGeometry = new THREE.SphereGeometry( 0.05 )
 const targetMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
 let target = new THREE.Mesh( targetGeometry, targetMaterial )
 scene.add( target )
+
 
 // mouse click functionality
 const mouse = new THREE.Vector2()
@@ -84,61 +88,60 @@ const raycaster = new THREE.Raycaster()
 
 function onWindowResize()
 {
-    camera.aspect = innerWidth / innerHeight
+    camera.aspect = container.innerWidth / container.innerHeight
     camera.updateProjectionMatrix()
-    renderer.setSize(innerWidth, innerHeight)
+    renderer.setSize(width, height)
 }
 
-window.addEventListener( 'resize', onWindowResize );
+window.addEventListener( 'resize', onWindowResize )
 
-window.addEventListener( 'mousedown', (e) => {
-    mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1
-	mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1
-    raycaster.setFromCamera( mouse, camera )
-    const intersects = raycaster.intersectObjects( scene.children, false )
-    console.log(intersects)
-    if (intersects.length > 0)
-    {
-        for (let i = 0; i < intersects.length; i++)
-        {
-            if (intersects[i].object.userData.globe)
-            {
-                console.log("Globe clicked index = " + i)
-                target.position.set(intersects[i].point.x, intersects[i].point.y, intersects[i].point.z)
-                convertToLatLong(intersects[i].point.x, intersects[i].point.y, intersects[i].point.z)
-            }
-        }
-    }
-    
-})
-
-const markLocation = () =>
+const convertToXPoint = () =>
 {
-    
-}
-
-const convertToLatLong = (x, y ,z) =>
-{
+    let lat = parseFloat(pickedCountry.latitude)
+    let long = parseFloat(pickedCountry.longitude)
+    var phi   = (90-lat)*(Math.PI/180);
+    var theta = (long+180)*(Math.PI/180);
     const r = 3
-    const lat = 90 - (Math.acos(y / r) * 180 / Math.PI)
-    let long
-    const firstLong = (((270 + (Math.atan2(x, z) * 180 / Math.PI)) % 360) - 180)
-    if (firstLong < 0)
-    {
-        long = firstLong + 180 
-    }
-    else if (firstLong > 0)
-    {
-        long = firstLong - 180
-    }
-    //console.log(lat + " " + long)
+    
+    let x = -(r * Math.sin(phi) * Math.cos(theta))
+
+    return x
 }
+
+const convertToYPoint = () =>
+{
+    let lat = parseFloat(pickedCountry.latitude)
+    let phi = (90-lat)*(Math.PI/180);
+    const r = 3
+    
+    let y = r * Math.cos(phi)
+
+    return y
+}
+
+const convertToZPoint = () =>
+{
+    let lat = parseFloat(pickedCountry.latitude)
+    let long = parseFloat(pickedCountry.longitude)
+    var phi   = (90-lat)*(Math.PI/180);
+    var theta = (long+180)*(Math.PI/180);
+    const r = 3
+
+    let z = r * Math.sin(phi) * Math.sin(theta)
+
+    return z
+}
+
+target.position.set(convertToXPoint(), convertToYPoint(), convertToZPoint())
+//controls.object.position.set(camera.x, camera.y, camera.z);
+//controls.target = new THREE.Vector3(convertToXPoint(), convertToYPoint(), convertToZPoint());
 
 // establishing the "main" function or entry point into file
 function animate() {
+    // camera.lookAt(target.position)
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
-    controls.update()
+    // controls.update()
 }
 
 // ------------------------------------------- Popup help screen --------------------------------------------------
