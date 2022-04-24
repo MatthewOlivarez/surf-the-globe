@@ -18,6 +18,11 @@ body
     font-family: "Montserrat", "Avenir";
 }
 
+h1
+{
+    color:white; 
+}
+
 p
 {
     margin: 1rem 0;

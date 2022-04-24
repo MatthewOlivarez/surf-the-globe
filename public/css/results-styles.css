@@ -2,13 +2,13 @@
 {
     box-sizing: border-box;
 } */
-body
-{
+body {
     margin: 0;
-    background-color: gainsboro;
+    background-color: linen;
     /* text-align: center;  */
     height: 100vh;
     overflow: hidden;
+    align-content: center;
 }
 ul
 {
@@ -22,27 +22,28 @@ li
 {
     list-style-type: none;
     width: 100%;
-} 
-button
+}
+button 
 {
     height: 100%;
     width: 100%;
     padding-top: 10%;
     padding-bottom: 10%;
-    background-color: teal;
-    border: none;
-    border-top: .1px solid black;
+    /* border: none;
+    border-top: 1px solid black;
+    border-right: 1px solid black; */
 }
 main 
 {
     overflow-y: auto;
+    /* overflow-x: hidden; */
     width: 100%;
 }
 aside 
 {
-    flex: 0 0 10%;
-    background-color: teal;
-    color: black;
+    height: 100%;
+    flex: 0 10 10%;
+    background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -51,30 +52,61 @@ aside
     height: 100%;
     
 }
-.wrapper
+.wrapper 
 {
+    position: relative;
     display: flex;
     /* flex-direction: row; */
     /* width: max-content; */
     /* gap: 1.5rem; */
-    height: 100%;
+    height: 90%;
+    /* margin-top: 6.75%;
+    margin-bottom: 10%; */
+    width: 100%;
 }
+.container
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+header
+{
+    width: 100%;
+    background-color: teal;
+    position: relative;
+}
+span
+{
+    text-align: right;
+    /* line-height: 1.5; */
+}
+span h1
+{
+    margin: 1% 0;
+    padding-right: 2.5%;
+}
+
+/*
 .corner-title
 {
     text-align: center;
     margin-top: 7%;
     margin-bottom: 7%;
 }
+    */
 .mainHeading
 {
     text-align: center;
     margin: 0 5rem;
+    margin-top: 3%;
 }
-.content
+.content 
 {
     margin: 1rem 5rem;
 }
-.subtitle
+.news-title
 {
     text-align: center;
 }
@@ -82,14 +114,25 @@ aside
 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-}
-.news-story
-{
-    border: groove;
-    margin-right: 3%;
-    margin-left: 3%;
+    margin-top: 3%;
     margin-bottom: 5%;
-    padding: 1%;
+    max-width: 100%;
+}
+.news-story {
+    border-style: outset;
+    border-block-end-color: black;
+    border-inline-end-color: black;
+    border-block-start-color: gray;
+    border-inline-start-color: gray;
+    margin-right: 4%;
+    margin-left: 4%;
+    margin-bottom: 5%;
+    padding: 3%;
+    text-align: center;
+}
+
+.culture-song{
+    display:grid;
 }
 .tabcontent
 {
@@ -97,8 +140,8 @@ aside
 }
 .active
 {
-    background-color: gainsboro;
-    color: black;
+    background-color: teal;
+    color: white;
 }
 #Facts
 {
@@ -111,6 +154,18 @@ aside
 #Health
 {
     display: none;
+}
+body,h1,h2,h3,h4,h5 
+{
+    font-family: "Poppins", sans-serif
+}
+h1 
+{
+    font-weight: bolder
+}
+h3 
+{
+    font-weight: bold
 }
 
 
