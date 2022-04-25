@@ -2,15 +2,18 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const axios = require('axios')
-const port = process.env.PORT || 80 // saving port to be used in server into variable
+const port = process.env.PORT || 3000 // saving port to be used in server into variable
 
 
 app.set('view engine', 'ejs') // sets engine for ejs formatting 
 
 // tells express to search for static files in views directory, static files are html files
-app.use(express.static(path.join(__dirname + '/views'))) 
-//app.set('views', path.join(__dirname, '/views'))
-
+//app.use(express.static(path.join(__dirname + '/views'))) 
+app.set('views', [
+    path.join(__dirname, '/views'),
+    path.join(__dirname, '/views/news'),
+    path.join(__dirname, '/views/game')
+])
 app.use(express.urlencoded({ extended: true })) // parses requests in JSON format
 app.use(express.json()) // similar to above, ensures we use JSON format for data from api's
 
@@ -20,17 +23,14 @@ app.use(express.json()) // similar to above, ensures we use JSON format for data
 app.use(express.static(path.join(__dirname + '/public')))
 
 // both of below statements are meant to incorporate three.js library for 3-d functionality
-app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')))
-app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')))
+app.use('/build/', express.static(path.join(__dirname, 'node_modules/three/build')));
+app.use('/jsm/', express.static(path.join(__dirname, 'node_modules/three/examples/jsm')));
 
 
 let newsStories = [] // this will be array of objects to store news stories
 let newsCollected = true 
-let countryFacts = []
 let countryCode // will store country code returned from geoapify api
 let countryName // will store country name returned from geoapify api
-let cultureData = []
-let healthData = []
 
 // "get" route that targets our home/landing page, no matter the result fo the if statement, 
 // we render the index file in views directory
@@ -51,11 +51,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/game', (req, res) => {
-    res.render('game-home')
-})
-
-app.get('/game-globe', (req, res) => {
-    res.render('game-globe')
+    res.render('game-home') // news globe page aka informational page
 })
 
 app.get('/news', (req, res) => {
@@ -71,8 +67,8 @@ app.get('/news', (req, res) => {
 app.post('/search', async (req, res) => { // post request to route search
     const { latitude, longitude } = req.body // destructuring or unpacking object
     //console.log(latitude + " " + longitude)
-    console.log(req.body)
-    await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6650f1fc646f45b9ac9f90d91eec2078`) // 
+    // console.log(req.body)
+    await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=6650f1fc646f45b9ac9f90d91eec2078`) 
         .then( (response) => {
             //console.log(response.data.features[0].properties.country_code)
             countryCode = response.data.features[0].properties.country_code;
@@ -96,72 +92,6 @@ app.post('/search', async (req, res) => { // post request to route search
             // handle error
             console.log(error);
         })
-    await axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-        .then((response) => {
-            countryFacts = []
-            //console.log(response.data.articles[i])
-            countryFacts.push(response.data)
-            //console.log(countryFacts[0][0].languages.eng)
-            //var langs = Object.keys(countryFacts[0][0].languages)
-        })
-        .catch((error) => {
-            // handle error
-            console.log(error);
-        })
-    var options = {
-        method: 'GET',
-        url: 'https://spotify23.p.rapidapi.com/charts/',
-        params: { type: 'regional', country: countryCode, recurrence: 'daily', date: 'latest' },
-        headers: {
-            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com',
-            'X-RapidAPI-Key': '3208057f72mshc5b45814ebd504fp1d66c8jsn8aa0bae558ec'
-        }
-    };
-
-
-    await axios.request(options)
-        .then(function (response) {
-            // console.log(response.data);
-            cultureData = [];
-            for (let i = 0; i < 6 ; i++) {
-                cultureData.push(response.data.content[i])
-            }
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
-
-
-
-    var options = {
-        method: 'GET',
-        url: 'https://countrystat.p.rapidapi.com/coronavirus/who_latest_stat_by_country.php',
-        params: { country: countryName },
-        headers: {
-            'X-RapidAPI-Host': 'countrystat.p.rapidapi.com',
-            'X-RapidAPI-Key': '3208057f72mshc5b45814ebd504fp1d66c8jsn8aa0bae558ec'
-        }
-    };
-
-    await axios.request(options)
-        .then(function (response) {
-            //   console.log(response.data);
-            healthData = [];
-            //  for (let i = 0; i < 6; i++) {
-            healthData.push(response.data.recordDate)
-            healthData.push(response.data.population)
-            healthData.push(response.data.lifeExpectancy)
-            healthData.push(response.data.totalDeaths)
-            healthData.push(response.data.newDeaths)
-            healthData.push(response.data.totalCases)
-            healthData.push(response.data.newCases)
-                // const myJSON = JSON.stringify(obj);
-                // localStorage.setItem("testJSON", myJSON);
-            //   }
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
     //res.send('worked')
     res.redirect('/results') // redirects to results route, which will display results to user
 })
@@ -170,7 +100,7 @@ app.post('/search', async (req, res) => { // post request to route search
 // "get" route that targets our results page, and will render results file from views directory
 app.get('/results', (req, res) => {
     //res.render('results')
-    res.render('results', { newsStories, countryName, countryFacts, cultureData, healthData }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
+    res.render('results', { newsStories, countryName }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
 })
  
 
