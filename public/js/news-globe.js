@@ -11,6 +11,7 @@ const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
 const globeCanvas = document.getElementById("globe-canvas")
+const instructions = document.getElementById("instructions")
 let obj
 let lat, long
 
@@ -127,6 +128,10 @@ function onWindowResize()
 window.addEventListener( 'resize', onWindowResize );
 
 window.addEventListener( 'mousedown', (e) => {
+    if (instructions.style.display != "none")
+    {
+        instructions.style.display = "none"
+    }
     mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1
 	mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1
     raycaster.setFromCamera( mouse, camera )
