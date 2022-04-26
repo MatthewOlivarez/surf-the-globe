@@ -82,7 +82,7 @@ app.post('/search', async (req, res) => { // post request to route search
     const { latitude, longitude } = req.body // destructuring or unpacking object
     //console.log(latitude + " " + longitude)
     console.log("Request data taken from form...\n")
-    console.log(req.body + "\n\n")
+    console.log(JSON.stringify(req.body) + "\n\n")
     // axios get request to geoapify api to reverse geocode the latitude and longitude pulled from the requested form
     await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=${GEO_KEY}`) 
         .then( (response) => {
@@ -90,7 +90,7 @@ app.post('/search', async (req, res) => { // post request to route search
             countryCode = response.data.features[0].properties.country_code; // storing country code from api
             countryName = response.data.features[0].properties.country; // storing country name from api
             console.log("Geoapify API data response...\n")
-            console.log(response.data.features[0].properties + "\n\n")
+            console.log(JSON.stringify(response.data.features[0].properties) + "\n\n")
         })
         .catch( (error) => {
             // handle error
@@ -100,12 +100,11 @@ app.post('/search', async (req, res) => { // post request to route search
     await axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${NEWS_KEY}`)
         .then( (response) => {
             console.log("News API response below...\n")
-            console.log(response.data.articles + "\n\n")
+            console.log(JSON.stringify(response.data.articles) + "\n\n")
             // storing top 9 news stories
             newsStories = []
             for (let i = 0; i < 10; i++)
             {
-                //console.log(response.data.articles[i])
                 newsStories.push(response.data.articles[i])
                 //console.log(newsStories[i])
             }
@@ -118,14 +117,14 @@ app.post('/search', async (req, res) => { // post request to route search
     await axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
         .then((response) => {
             console.log("Country facts API response below...\n")
-            console.log(response.data + "\n\n")
+            console.log(JSON.stringify(response.data) + "\n\n")
             countryFacts = []
             //console.log(response.data.articles[i])
             countryFacts.push(response.data) // storing entirety of response to use in results page
         })
         .catch((error) => {
             // handle error
-            console.log(error);
+            console.log(error)
         })
     var options = {
         method: 'GET',
@@ -140,7 +139,7 @@ app.post('/search', async (req, res) => { // post request to route search
     await axios.request(options)
         .then(function (response) {
             console.log("Culture API data below...\n")
-            console.log(response.data + "\n\n")
+            console.log(JSON.stringify(response.data) + "\n\n")
             cultureData = [];
             for (let i = 0; i < 6 ; i++) {
                 cultureData.push(response.data.content[i]) // storing top 5 results in array
@@ -148,7 +147,7 @@ app.post('/search', async (req, res) => { // post request to route search
         })
         .catch(function (error) {
             console.error(error);
-        });
+        })
     var options = {
         method: 'GET',
         url: 'https://countrystat.p.rapidapi.com/coronavirus/who_latest_stat_by_country.php',
@@ -157,12 +156,12 @@ app.post('/search', async (req, res) => { // post request to route search
             'X-RapidAPI-Host': 'countrystat.p.rapidapi.com',
             'X-RapidAPI-Key': `${RAPID_KEY}`
         }
-    };
+    }
     // axios get request to country stat api
     await axios.request(options)
         .then(function (response) {
             console.log("Health API data below...\n")
-            console.log(response.data + "\n\n")
+            console.log(JSON.stringify(response.data) + "\n\n")
             healthData = [];
             //  for (let i = 0; i < 6; i++) {
             // pushing the following data into the array
@@ -179,7 +178,7 @@ app.post('/search', async (req, res) => { // post request to route search
         })
         .catch(function (error) {
             console.error(error);
-        });
+        })
     //res.send('worked')
     res.redirect('/results') // redirects to results route, which will display results to user
 })
