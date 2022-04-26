@@ -1,8 +1,12 @@
+// imports
 import { availableCountries } from 'countrySeeds'
 
+// local variables
 let numOfSquares = 8
 let pickedCountry
 let countries = []
+
+// variables taken from the DOM
 const squares = document.querySelectorAll(".square")
 const messageDisplay = document.querySelector("#message")
 const h1 = document.querySelector("h1")
@@ -23,14 +27,16 @@ const init = () =>
 	reset()
 }
 
-
+// sets up logic for the squares
 const setUpSquares = () =>
 {
 	for (var i = 0; i < squares.length; i++)
 	{
+		// adds click listeners to the squares containing country names
 		squares[i].addEventListener("click", function()
 		{
 			var clickedCountry = this.innerHTML
+			// if the clicked country name == the randomly selected country name display correct information
 			if ( clickedCountry === pickedCountry.name  && messageDisplay.innerHTML !== "Correct")
 			{
 				messageDisplay.textContent = "Correct"
@@ -51,11 +57,13 @@ const setUpSquares = () =>
 	}
 }
 
-
+// main logic of program
 const reset = () =>
 {
+	// generates array of random countries
 	countries = generateRandomCountries(numOfSquares)
 	//console.log(countries)
+	// randomly selects country from countries array
 	pickedCountry = pickCountry()
 	latitude.value = parseFloat(pickedCountry.latitude).toFixed(3) // updated
     longitude.value = parseFloat(pickedCountry.longitude).toFixed(3) // updated
@@ -81,12 +89,13 @@ const reset = () =>
 	//h1.style.backgroundColor = "steelblue"
 }
 
-
+// reset button listens for click
 resetButton.addEventListener("click", function()
 {
 	reset()
 })
 
+// generates random countries to place in array, while avoiding duplicates
 const generateRandomCountries = (numOfSquares) =>
 {
 	let countryList = []
@@ -119,6 +128,7 @@ const generateRandomCountries = (numOfSquares) =>
 	return countryList
 }
 
+// picks random country
 const pickCountry = () =>
 {
 	return countries[Math.floor(Math.random() * numOfSquares)]

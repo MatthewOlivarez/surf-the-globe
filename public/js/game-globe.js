@@ -1,9 +1,13 @@
+/*
+THIS FILE SERVES AS THE HINT IN THE GAME PAGE
+*/
+
 // imports 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { pickedCountry } from 'gameHome'
 
-
+// defining variables from the DOM
 const openModalButtons = document.querySelectorAll("[data-modal-target]")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
@@ -37,15 +41,12 @@ renderer.setPixelRatio(window.devicePixelRatio) // cleans up image, better quali
 
 
 // light
-const ambientLight = new THREE.AmbientLight(0x333333);
-scene.add(ambientLight)
-
 const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
 scene.add(directionalLight)
 directionalLight.position.set(0, 50, 0)
 
 
-// create a sphere
+// create a sphere -> intended to be our globe
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(3,50,50),
     new THREE.MeshBasicMaterial({
@@ -53,6 +54,7 @@ const sphere = new THREE.Mesh(
         map: new THREE.TextureLoader().load('./img/Globe.jpeg') // jpg is "wrapped" around the sphere
     })
 )
+// user data to distinguish this object from others within the scene
 sphere.userData.globe = true
 sphere.userData.name = "Globe"
 scene.add(sphere)
@@ -94,6 +96,7 @@ function onWindowResize()
 
 window.addEventListener( 'resize', onWindowResize )
 
+// finds the x coordinate 
 const convertToXPoint = () =>
 {
     let lat = parseFloat(pickedCountry.latitude)
@@ -107,6 +110,7 @@ const convertToXPoint = () =>
     return x
 }
 
+// finds the y coordinate
 const convertToYPoint = () =>
 {
     let lat = parseFloat(pickedCountry.latitude)
@@ -118,6 +122,7 @@ const convertToYPoint = () =>
     return y
 }
 
+// finds the z coordinate
 const convertToZPoint = () =>
 {
     let lat = parseFloat(pickedCountry.latitude)

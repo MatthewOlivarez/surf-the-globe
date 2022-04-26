@@ -1,3 +1,8 @@
+/*
+THIS PAGE HARD CODES DATA TO SEND INTO 
+THE GAME-HOME.JS FILE
+*/
+
 const availableCountries = [
 	
 ]
