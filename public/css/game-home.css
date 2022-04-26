@@ -119,6 +119,10 @@ input
 {
 	display: none;
 	margin: 0;
+	background-color: teal;
+	color: white;
+	border: none;
+	border: 1px solid white;
 }
 
 /* next 2 selectors remove arrows on form inputs  */

@@ -42,7 +42,8 @@ p
     gap: 10px;
     /* grid-auto-rows: 100%; */
     grid-template-areas:
-        ". . . a b b b b b b b c . . . .";
+        ". . . a b b b b b b b c . . . ."
+        ". d d d . . . . . . . . . . . .";
     align-items: start;
     height: 100vh;
     width: 100vw;
@@ -73,6 +74,13 @@ p
 .home-div
 {
     grid-area: a;
+    z-index: 2;
+}
+
+.on-screen-info
+{
+    color: white;
+    grid-area: d;
     z-index: 2;
 }
 
@@ -227,6 +235,10 @@ input::-webkit-inner-spin-button
         grid-template-areas:
         ". . a b b b b b b b b b c . .";
     }
+    .on-screen-info
+    {
+        display: none;
+    }
 }
 
 @media (max-width: 1175px)
@@ -236,6 +248,10 @@ input::-webkit-inner-spin-button
         grid-template-areas:
         ". a b b b b b b b b b b b c .";
     }
+    .on-screen-info
+    {
+        display: none;
+    }
 }
 
 @media (max-width: 992px)
@@ -244,6 +260,10 @@ input::-webkit-inner-spin-button
     {
         grid-template-areas:
         "a b b b b b b b b b b b b b c";
+    }
+    .on-screen-info
+    {
+        display: none;
     }
 }
 
@@ -259,12 +279,16 @@ input::-webkit-inner-spin-button
     {
         align-self: flex-end;
     }
+    .on-screen-info
+    {
+        display: none;
+    }
 }
 
-@media (max-width: 627px)
+/* @media (max-width: 627px)
 {
     
-}
+} */
 
 /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide 
 @media (max-width: 1455px) 
