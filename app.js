@@ -38,6 +38,7 @@ let countryCode // will store country code returned from geoapify api
 let countryName // will store country name returned from geoapify api
 let cultureData = []
 let healthData = []
+let caughtError
 
 // "get" route that targets our home/landing page, no matter the result fo the if statement, 
 // we render the index file in views directory
@@ -94,7 +95,9 @@ app.post('/search', async (req, res) => { // post request to route search
         })
         .catch( (error) => {
             // handle error
-            console.log(error);
+            console.log(error)
+            caughtError = error
+            res.redirect('/invalid-search')
         })
     // axios get request to news api using country code and country name that were just retrieved
     await axios.get(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${NEWS_KEY}`)
@@ -111,7 +114,9 @@ app.post('/search', async (req, res) => { // post request to route search
         })
         .catch( (error) => {
             // handle error
-            console.log(error);
+            console.log(error)
+            caughtError = error
+            res.redirect('/invalid-search')
         })
     // axios get request to rest countries api using country code variable
     await axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
@@ -125,6 +130,8 @@ app.post('/search', async (req, res) => { // post request to route search
         .catch((error) => {
             // handle error
             console.log(error)
+            caughtError = error
+            res.redirect('/invalid-search')
         })
     var options = {
         method: 'GET',
@@ -146,7 +153,9 @@ app.post('/search', async (req, res) => { // post request to route search
             }
         })
         .catch(function (error) {
-            console.error(error);
+            console.error(error)
+            caughtError = error
+            res.redirect('/invalid-search')
         })
     var options = {
         method: 'GET',
@@ -177,7 +186,9 @@ app.post('/search', async (req, res) => { // post request to route search
             //   }
         })
         .catch(function (error) {
-            console.error(error);
+            console.error(error)
+            caughtError = error
+            res.redirect('/invalid-search')
         })
     //res.send('worked')
     res.redirect('/results') // redirects to results route, which will display results to user
@@ -188,6 +199,10 @@ app.post('/search', async (req, res) => { // post request to route search
 app.get('/results', (req, res) => {
     //res.render('results')
     res.render('results', { newsStories, countryName, countryFacts, cultureData, healthData }) // renders results, { newsStories, countryName } this will pass the newsStories array and country name variable into the file using the ejs package, which is for templating and sending data into files
+})
+
+app.get('/invalid-search', (req,res) => {
+    res.render('error', { caughtError })
 })
  
 
