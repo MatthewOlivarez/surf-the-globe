@@ -1,4 +1,4 @@
-<!-- EJS FILE FOR HOME/LANDING PAGE -->
+<!-- EJS FILE FOR ERROR PAGE -->
 <!-- CS3340A SOFTWARE ENGINEERING -->
 <!-- SURF THE GLOBE PROJECT -->
 <!-- SPRING 2022 -->
@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surf The Globe</title>
+    <title>Error Page</title>
     <link rel="stylesheet" href="/css/index-styles.css">
     <script type="importmap">
         {
@@ -26,14 +26,12 @@
     <div class="header" id="top">
         <div class="header-text">
             <div class="content">
-                <h1>Surf The Globe</h1>
-                <h2>Select to view the globe or play a game!</h2>
-                <button class="btn"><a href="/news">Globe</a></button>
+                <h1><%= caughtError %></h1>
+                <button class="btn"><a href="/news">Go back</a></button>
                 <button class="btn"><a href="/game">Game</a></button>
-                <script type="module" src="/js/globe.js"></script>
             </div>
         </div>
     </div>
-    
+    <script type="module" src="/js/globe.js"></script>
 </body>
 </html>
